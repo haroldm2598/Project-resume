@@ -1,0 +1,80 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Karla:wght@700&display=swap');
+
+* {
+	padding: 0;
+	margin: 0;
+	box-sizing: border-box;
+	font-family: 'Karla', sans-serif;
+	color: #2b283a;
+}
+
+.container {
+	height: 100vh;
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	background-color: rgb(46, 59, 49);
+}
+.editorContainer,
+.postContainer {
+	height: 600px;
+	width: 50%;
+	margin: 2rem;
+	padding: 2rem;
+	background-color: bisque;
+	border-radius: 10px;
+}
+
+.postContainer {
+	background-color: #ffffff;
+}
+
+input[type='text'],
+input[type='email'],
+.textArea {
+	width: 100%;
+	height: 25px;
+	margin: 0.2rem 0;
+	padding: 0 0.2rem;
+	border: none;
+	border-radius: 5px;
+}
+
+.textArea {
+	height: 100px;
+	resize: none;
+}
+
+.list {
+	list-style-type: none;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	&__first {
+		&--name {
+			font-size: 3rem;
+			text-transform: uppercase;
+		}
+
+		&--position {
+			color: #2b283a92;
+			font-size: 1.5rem;
+		}
+	}
+
+	&__second {
+		& > *:not(:last-child) {
+			margin-bottom: 0.5rem;
+		}
+
+		& * {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			margin-right: 5px;
+			color: #2b283acb;
+		}
+	}
+}

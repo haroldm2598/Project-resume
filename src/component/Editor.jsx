@@ -1,0 +1,53 @@
+export default function Editor(props) {
+	return (
+		<>
+			<div className='editorContainer'>
+				<h1>{props.title}</h1>
+				<form>
+					<input
+						type='text'
+						placeholder={props.detail1}
+						onChange={props.handleChange}
+						name={props.name1}
+						value={props.form1}
+					></input>
+					<input
+						type='text'
+						placeholder={props.detail2}
+						onChange={props.handleChange}
+						name={props.name2}
+						value={props.form2}
+					></input>
+					<input
+						type='text'
+						placeholder={props.detail3}
+						onChange={props.handleChange}
+						name={props.name3}
+						value={props.form3}
+					></input>
+					<input
+						type='email'
+						placeholder={props.detail4}
+						onChange={props.handleChange}
+						name={props.name4}
+						value={props.form4}
+					></input>
+					<input
+						type='text'
+						placeholder={props.detail5}
+						onChange={props.handleChange}
+						name={props.name5}
+						value={props.form5}
+					></input>
+					<textarea
+						className='textArea'
+						placeholder={props.detail6}
+						onChange={props.handleChange}
+						name={props.name6}
+						value={props.form6}
+					></textarea>
+				</form>
+			</div>
+		</>
+	);
+}
