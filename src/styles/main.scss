@@ -8,20 +8,25 @@
 	color: #2b283a;
 }
 
+hr {
+	border: 2px solid #fca311;
+	margin: 1rem 0;
+}
+
 .container {
-	height: 100vh;
+	height: 100%;
 	width: 100%;
 	display: flex;
 	flex-direction: row;
 	background-color: rgb(46, 59, 49);
 }
-.editorContainer,
+.detailsContainer,
 .postContainer {
-	height: 600px;
+	height: 900px;
 	width: 50%;
 	margin: 2rem;
 	padding: 2rem;
-	background-color: bisque;
+	background-color: #e3d9c7;
 	border-radius: 10px;
 }
 
@@ -59,14 +64,16 @@ input[type='email'],
 		}
 
 		&--position {
-			color: #2b283a92;
+			color: #b9b9b9;
 			font-size: 1.5rem;
 		}
 	}
 
 	&__second {
+		font-size: 0.9rem;
+
 		& > *:not(:last-child) {
-			margin-bottom: 0.5rem;
+			margin-bottom: 0.2rem;
 		}
 
 		& * {
@@ -75,6 +82,45 @@ input[type='email'],
 			align-items: center;
 			margin-right: 5px;
 			color: #2b283acb;
+		}
+	}
+}
+
+.workTitle {
+	margin: 0.8rem 0;
+	color: #14213d;
+	font-size: 1.25rem;
+	text-transform: uppercase;
+}
+
+.work {
+	margin-bottom: 0.5rem;
+	display: flex;
+	justify-content: space-between;
+	font-size: 0.8rem;
+
+	&__end {
+		display: flex;
+
+		&--company {
+			margin-right: 0.2rem;
+		}
+	}
+
+	&__btn {
+		height: 30px;
+		width: 80px;
+		margin: 0.8rem 0.5rem 0.8rem 0;
+		background-color: #ffffff;
+		border: none;
+		cursor: pointer;
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.18);
 		}
 	}
 }
