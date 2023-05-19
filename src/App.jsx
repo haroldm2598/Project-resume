@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { nanoid } from 'nanoid';
 import Details from './component/Details';
 import Work from './component/Work';
 import Post from './component/Post';
@@ -6,16 +7,26 @@ import './styles/main.scss';
 
 export default function App() {
 	const [form, setForm] = useState(setDetails());
-	const [work, setWork] = useState(setWorkDetails());
-	const [deleteWork, setDeleteWork] = useState(work[0].isShow);
+	const [works, setWorks] = useState(setWorkDetails());
+	const [deleteWork, setDeleteWork] = useState(works[0].isShow);
+
+	useEffect(() => {
+		console.log('Add new work');
+	}, [works]);
 
 	function deleteToggle(event) {
 		event.preventDefault();
 		setDeleteWork((prevShown) => !prevShown);
 	}
 
+	// function addWork(event) {
+	// 	event.preventDefault();
+	// 	const work = {}
+	// 	setWorks(prevWork => [work, ...prevWork]);
+	// }
+
 	function setDetails() {
-		const details = {
+		return {
 			fullName: 'John Doe',
 			position: 'Software Engineer',
 			phoneNumber: '1239 982 721',
@@ -23,13 +34,12 @@ export default function App() {
 			location: 'france, milan',
 			comments: 'lorem ipsum'
 		};
-
-		return details;
 	}
 
 	function setWorkDetails() {
-		const details = [
+		return [
 			{
+				id: nanoid(),
 				companyName: 'A Software Engineer',
 				workPosition: 'Software Engineer',
 				dateStart: '2018',
@@ -38,8 +48,6 @@ export default function App() {
 				isShow: true
 			}
 		];
-
-		return details;
 	}
 
 	function handleChange() {
@@ -52,15 +60,51 @@ export default function App() {
 			};
 		});
 
-		setWork((prevForm) => {
+		// Not like the setForm way but looks like create new array will be the way
+		/*
+			- Find the whole id for the value then
+			- if (oldWork.id === currentTargetId) array.push(updated text value)
+		*/
+		setWorks((oldWorks) => {
 			return {
-				...prevForm,
+				...oldWorks,
 				[name]: value
 			};
+
+			// const newArr = [];
+			// for (let i = 0; i < oldWorks.length; i++) {
+			// 	const oldWork = oldWorks[i];
+			// 	if (oldWork.id) {
+			// 		newArr.push({
+			// 			...oldWorks,
+			// 			[name]: value
+			// 		});
+			// 	} else {
+			// 		newArr.push(oldWork);
+			// 	}
+			// }
+			// return newArr;
 		});
 
-		console.log(work);
+		console.log(setWorks((oldWorks) => console.log({ oldWorks })));
 	}
+
+	// <POST/> will be the target not the <Work/>
+	// const workElement = work.map((item) => (
+	// 	<Work
+	// 		key={item.id}
+	// 		work1={item.companyName}
+	// 		work2={item.workPosition}
+	// 		work3={item.dateStart}
+	// 		work4={item.dateEnd}
+	// 		work5={item.workDetails}
+	// 		isShow={deleteWork}
+	// 		deleteToggle={deleteToggle}
+	// 		handleChange={handleChange}
+	// 	/>
+	// ));
+
+	// console.log(workElement);
 
 	return (
 		<>
@@ -84,13 +128,14 @@ export default function App() {
 					/>
 
 					<Work
-						work1={work.companyName}
-						work2={work.workPosition}
-						work3={work.dateStart}
-						work4={work.dateEnd}
-						work5={work.workDetails}
+						work1={works[0].companyName}
+						work2={works[0].workPosition}
+						work3={works[0].dateStart}
+						work4={works[0].dateEnd}
+						work5={works[0].workDetails}
 						isShow={deleteWork}
 						deleteToggle={deleteToggle}
+						// addWork={addWork}
 						handleChange={handleChange}
 					/>
 				</div>
@@ -102,11 +147,11 @@ export default function App() {
 					form5={form.location}
 					form6={form.comments}
 					workTitle={'work experience'}
-					work1={work[0].workPosition}
-					work2={work[0].companyName}
-					work3={work[0].dateStart}
-					work4={work[0].dateEnd}
-					work5={work[0].workDetails}
+					work1={works[0].workPosition}
+					work2={works[0].companyName}
+					work3={works[0].dateStart}
+					work4={works[0].dateEnd}
+					work5={works[0].workDetails}
 				/>
 			</div>
 		</>
