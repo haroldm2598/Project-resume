@@ -3,27 +3,37 @@ import { nanoid } from 'nanoid';
 import Details from './component/Details';
 import Work from './component/Work';
 import Post from './component/Post';
+import WorkPost from './component/WorkPost';
 import './styles/main.scss';
 
 export default function App() {
 	const [form, setForm] = useState(setDetails());
-	const [works, setWorks] = useState(setWorkDetails());
+	const [works, setWorks] = useState(setWorkDetails() || '');
 	const [deleteWork, setDeleteWork] = useState(works[0].isShow);
 
 	useEffect(() => {
-		console.log('Add new work');
+		console.log(works);
 	}, [works]);
 
-	function deleteToggle(event) {
+	function deleteToggle(event, id) {
 		event.preventDefault();
-		setDeleteWork((prevShown) => !prevShown);
+		setWorks(works.filter((item) => item.id !== id));
+		// const resultTest = works.map(item => item.id)
 	}
 
-	// function addWork(event) {
-	// 	event.preventDefault();
-	// 	const work = {}
-	// 	setWorks(prevWork => [work, ...prevWork]);
-	// }
+	function addWork(event) {
+		event.preventDefault();
+		const work = {
+			id: nanoid(),
+			companyName: 'Facebook company',
+			workPosition: 'Software Engineer',
+			dateStart: '2018',
+			dateEnd: '2020',
+			workDetails: 'france, milan',
+			isShow: true
+		};
+		setWorks([...works, work]);
+	}
 
 	function setDetails() {
 		return {
@@ -45,6 +55,15 @@ export default function App() {
 				dateStart: '2018',
 				dateEnd: '2020',
 				workDetails: 'france, milan',
+				isShow: true
+			},
+			{
+				id: nanoid(),
+				companyName: 'Google Inc',
+				workPosition: 'Full stack lead',
+				dateStart: '2020',
+				dateEnd: 'present',
+				workDetails: 'USA, california',
 				isShow: true
 			}
 		];
@@ -86,26 +105,46 @@ export default function App() {
 			// return newArr;
 		});
 
-		console.log(setWorks((oldWorks) => console.log({ oldWorks })));
+		// setWorks((work) =>
+		// 	console.log(work.find((item) => item.id === works[0].id))
+		// );
 	}
 
+	// ELEMENT THAT WILL GET AND POST
 	// <POST/> will be the target not the <Work/>
-	// const workElement = work.map((item) => (
-	// 	<Work
-	// 		key={item.id}
-	// 		work1={item.companyName}
-	// 		work2={item.workPosition}
-	// 		work3={item.dateStart}
-	// 		work4={item.dateEnd}
-	// 		work5={item.workDetails}
-	// 		isShow={deleteWork}
-	// 		deleteToggle={deleteToggle}
-	// 		handleChange={handleChange}
-	// 	/>
-	// ));
+	const workElement = works.map((item) => (
+		<Work
+			key={item.id}
+			workId={item.id}
+			work1={item.companyName}
+			work2={item.workPosition}
+			work3={item.dateStart}
+			work4={item.dateEnd}
+			work5={item.workDetails}
+			isShow={deleteWork}
+			deleteToggle={(event) => deleteToggle(event, item.id)}
+			addWork={addWork}
+			handleChange={handleChange}
+		/>
+	));
 
-	// console.log(workElement);
-
+	const workElementPost = works.map((item, index) => (
+		<WorkPost
+			key={index}
+			work1={item.workPosition}
+			work2={item.companyName}
+			work3={item.dateStart}
+			work4={item.dateEnd}
+			work5={item.workDetails}
+		/>
+	));
+	/*
+	work1={works[0].workPosition}
+	work2={works[0].companyName}
+	work3={works[0].dateStart}
+	work4={works[0].dateEnd}
+	work5={works[0].workDetails}
+	*/
 	return (
 		<>
 			<div className='container'>
@@ -126,18 +165,7 @@ export default function App() {
 						form6={form.comments}
 						handleChange={handleChange}
 					/>
-
-					<Work
-						work1={works[0].companyName}
-						work2={works[0].workPosition}
-						work3={works[0].dateStart}
-						work4={works[0].dateEnd}
-						work5={works[0].workDetails}
-						isShow={deleteWork}
-						deleteToggle={deleteToggle}
-						// addWork={addWork}
-						handleChange={handleChange}
-					/>
+					{workElement}
 				</div>
 				<Post
 					form1={form.fullName}
@@ -146,13 +174,16 @@ export default function App() {
 					form4={form.emailAddress}
 					form5={form.location}
 					form6={form.comments}
-					workTitle={'work experience'}
-					work1={works[0].workPosition}
-					work2={works[0].companyName}
-					work3={works[0].dateStart}
-					work4={works[0].dateEnd}
-					work5={works[0].workDetails}
-				/>
+					// workTitle={'work experience'}
+					// work1={works[0].workPosition}
+					// work2={works[0].companyName}
+					// work3={works[0].dateStart}
+					// work4={works[0].dateEnd}
+					// work5={works[0].workDetails}
+				>
+					componentChild={workElementPost}
+					<button> TESTING </button>
+				</Post>
 			</div>
 		</>
 	);

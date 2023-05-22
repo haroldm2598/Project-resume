@@ -28,7 +28,7 @@ export default function Post(props) {
 				</ul>
 				<hr />
 				<div className='list__comments'>{props.form6}</div>
-				<h1 className='workTitle'>{props.workTitle}</h1>
+				{/* <h1 className='workTitle'>{props.workTitle}</h1>
 				<div className='work'>
 					<h3 className='work__job'>{props.work1}</h3>
 					<div className='work__end'>
@@ -38,7 +38,8 @@ export default function Post(props) {
 						</h3>
 					</div>
 				</div>
-				<p className='workDetails'>{props.work5}</p>
+				<p className='workDetails'>{props.work5}</p> */}
+				{props.componentChild}
 			</div>
 		</>
 	);

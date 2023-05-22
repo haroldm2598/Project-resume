@@ -1,7 +1,7 @@
 export default function Work(props) {
 	// if (!props.isShow) {
 	// 	return (
-	// 		<button className='work__btn' onClick={props.addWork}>
+	// 		<button className='work__btn' onClick={props.deleteToggle}>
 	// 			Add
 	// 		</button>
 	// 	);
@@ -57,9 +57,9 @@ export default function Work(props) {
 					Delete
 				</button>
 
-				{/* <button className='work__btn' onClick={props.addWork}>
+				<button className='work__btn' onClick={props.addWork}>
 					Add
-				</button> */}
+				</button>
 			</form>
 		</>
 	);
