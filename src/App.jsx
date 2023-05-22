@@ -9,7 +9,7 @@ import './styles/main.scss';
 export default function App() {
 	const [form, setForm] = useState(setDetails());
 	const [works, setWorks] = useState(setWorkDetails() || '');
-	const [deleteWork, setDeleteWork] = useState(works[0].isShow);
+	// const [deleteWork, setDeleteWork] = useState(works[0].isShow);
 
 	useEffect(() => {
 		console.log(works);
@@ -18,7 +18,6 @@ export default function App() {
 	function deleteToggle(event, id) {
 		event.preventDefault();
 		setWorks(works.filter((item) => item.id !== id));
-		// const resultTest = works.map(item => item.id)
 	}
 
 	function addWork(event) {
@@ -111,7 +110,6 @@ export default function App() {
 	}
 
 	// ELEMENT THAT WILL GET AND POST
-	// <POST/> will be the target not the <Work/>
 	const workElement = works.map((item) => (
 		<Work
 			key={item.id}
@@ -121,7 +119,7 @@ export default function App() {
 			work3={item.dateStart}
 			work4={item.dateEnd}
 			work5={item.workDetails}
-			isShow={deleteWork}
+			// isShow={deleteWork}
 			deleteToggle={(event) => deleteToggle(event, item.id)}
 			addWork={addWork}
 			handleChange={handleChange}
@@ -131,6 +129,7 @@ export default function App() {
 	const workElementPost = works.map((item, index) => (
 		<WorkPost
 			key={index}
+			// workTitle={'work experience'}
 			work1={item.workPosition}
 			work2={item.companyName}
 			work3={item.dateStart}
@@ -138,13 +137,7 @@ export default function App() {
 			work5={item.workDetails}
 		/>
 	));
-	/*
-	work1={works[0].workPosition}
-	work2={works[0].companyName}
-	work3={works[0].dateStart}
-	work4={works[0].dateEnd}
-	work5={works[0].workDetails}
-	*/
+
 	return (
 		<>
 			<div className='container'>
@@ -174,15 +167,9 @@ export default function App() {
 					form4={form.emailAddress}
 					form5={form.location}
 					form6={form.comments}
-					// workTitle={'work experience'}
-					// work1={works[0].workPosition}
-					// work2={works[0].companyName}
-					// work3={works[0].dateStart}
-					// work4={works[0].dateEnd}
-					// work5={works[0].workDetails}
+					workTitle={'work experience'}
 				>
-					componentChild={workElementPost}
-					<button> TESTING </button>
+					{workElementPost}
 				</Post>
 			</div>
 		</>

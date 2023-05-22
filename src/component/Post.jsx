@@ -39,7 +39,8 @@ export default function Post(props) {
 					</div>
 				</div>
 				<p className='workDetails'>{props.work5}</p> */}
-				{props.componentChild}
+				<h1 className='workTitle'>{props.workTitle}</h1>
+				{props.children}
 			</div>
 		</>
 	);
