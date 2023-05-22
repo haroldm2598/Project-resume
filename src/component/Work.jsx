@@ -9,7 +9,7 @@ export default function Work(props) {
 	return (
 		<>
 			<h1>Work Experience</h1>
-			<form>
+			<form onClick={() => props.setCurrentWorkId(props.workId)}>
 				{/* {props.isShow && (
 					<> */}
 				<input
@@ -53,14 +53,15 @@ export default function Work(props) {
 				/>
 				{/* </>
 				)} */}
-				<button className='work__btn' onClick={props.deleteToggle}>
-					Delete
-				</button>
-
-				<button className='work__btn' onClick={props.addWork}>
-					Add
-				</button>
 			</form>
+
+			<button className='work__btn' onClick={props.deleteToggle}>
+				Delete
+			</button>
+
+			<button className='work__btn' onClick={props.addWork}>
+				Add
+			</button>
 		</>
 	);
 }

@@ -9,7 +9,11 @@ import './styles/main.scss';
 export default function App() {
 	const [form, setForm] = useState(setDetails());
 	const [works, setWorks] = useState(setWorkDetails() || '');
+	const [currentWorkId, setCurrentWorkId] = useState('');
 	// const [deleteWork, setDeleteWork] = useState(works[0].isShow);
+
+	const currentWork =
+		works.find((work) => work.id === currentWorkId) || works[0];
 
 	useEffect(() => {
 		console.log(works);
@@ -24,11 +28,11 @@ export default function App() {
 		event.preventDefault();
 		const work = {
 			id: nanoid(),
-			companyName: 'Facebook company',
-			workPosition: 'Software Engineer',
-			dateStart: '2018',
-			dateEnd: '2020',
-			workDetails: 'france, milan',
+			companyName: 'Company here',
+			workPosition: 'Previous Position',
+			dateStart: 'Date start',
+			dateEnd: 'Date end',
+			workDetails: 'Location',
 			isShow: true
 		};
 		setWorks([...works, work]);
@@ -78,35 +82,18 @@ export default function App() {
 			};
 		});
 
-		// Not like the setForm way but looks like create new array will be the way
-		/*
-			- Find the whole id for the value then
-			- if (oldWork.id === currentTargetId) array.push(updated text value)
-		*/
-		setWorks((oldWorks) => {
-			return {
-				...oldWorks,
-				[name]: value
-			};
+		// setWorks((oldWorks) => {
+		// 	return {
+		// 		...oldWorks,
+		// 		[name]: value
+		// 	};
+		// });
 
-			// const newArr = [];
-			// for (let i = 0; i < oldWorks.length; i++) {
-			// 	const oldWork = oldWorks[i];
-			// 	if (oldWork.id) {
-			// 		newArr.push({
-			// 			...oldWorks,
-			// 			[name]: value
-			// 		});
-			// 	} else {
-			// 		newArr.push(oldWork);
-			// 	}
-			// }
-			// return newArr;
-		});
-
-		// setWorks((work) =>
-		// 	console.log(work.find((item) => item.id === works[0].id))
-		// );
+		setWorks(
+			works.map((item) =>
+				item.id === currentWork.id ? { ...item, [name]: value } : item
+			)
+		);
 	}
 
 	// ELEMENT THAT WILL GET AND POST
@@ -120,6 +107,7 @@ export default function App() {
 			work4={item.dateEnd}
 			work5={item.workDetails}
 			// isShow={deleteWork}
+			setCurrentWorkId={setCurrentWorkId}
 			deleteToggle={(event) => deleteToggle(event, item.id)}
 			addWork={addWork}
 			handleChange={handleChange}
