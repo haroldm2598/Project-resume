@@ -91,10 +91,17 @@ export default function App() {
 	}
 
 	// ELEMENT THAT WILL GET AND POST
+	/* 
+		- PROBLEM IS. IF THE MAP IS BEING PASS AS PROPS
+		THE LENGTH OF AN EMPTY ARRAY WILL NOT BE CONSOLE OR READ AS PROPS
+		- ELSE IF NOT BEING MAP AND PASS AS NORMAL PROPS TO COMPONENT THEREFORE IT WILL WORK
+
+		- TRANSFER ALL THE WORK VALUES INTO PROPS CHILDREN LIKE WHAT I DID IN workElementPost
+	*/
 	const workElement = works.map((item) => (
 		<Work
 			key={item.id}
-			workArr={works}
+			// workArr={works}
 			workId={item.id}
 			work1={item.companyName}
 			work2={item.workPosition}
@@ -140,19 +147,21 @@ export default function App() {
 						form6={form.comments}
 						handleChange={handleChange}
 					/>
-					{workElement}
+					{workElement && <Work workArr={works} />}
 				</div>
-				<Post
-					form1={form.fullName}
-					form2={form.position}
-					form3={form.phoneNumber}
-					form4={form.emailAddress}
-					form5={form.location}
-					form6={form.comments}
-					workTitle={'work experience'}
-				>
-					{workElementPost}
-				</Post>
+				<div className='postContainer'>
+					<Post
+						form1={form.fullName}
+						form2={form.position}
+						form3={form.phoneNumber}
+						form4={form.emailAddress}
+						form5={form.location}
+						form6={form.comments}
+						workTitle={'work experience'}
+					>
+						{workElementPost}
+					</Post>
+				</div>
 			</div>
 		</>
 	);
