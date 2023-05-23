@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { nanoid } from 'nanoid';
 import Details from './component/Details';
 import Work from './component/Work';
@@ -14,6 +14,7 @@ export default function App() {
 	const currentWork =
 		works.find((work) => work.id === currentWorkId) || works[0];
 
+	// KAPAG GUSTO KO MAY I ACCESS SA LABAS NG CODE
 	// useEffect(() => {
 	// 	console.log(works);
 	// }, [works]);
@@ -31,7 +32,7 @@ export default function App() {
 			workPosition: 'Previous Position',
 			dateStart: 'Date start',
 			dateEnd: 'Date end',
-			workDetails: 'Location',
+			workDetails: 'Work details',
 			isShow: true
 		};
 
@@ -45,7 +46,8 @@ export default function App() {
 			phoneNumber: '1239 982 721',
 			emailAddress: 'testing@gmail.com',
 			location: 'france, milan',
-			comments: 'lorem ipsum'
+			comments:
+				'Cupidatat sunt anim incididunt nisi labore sunt nulla Lorem elit irure. Aliquip quis excepteur et nostrud enim irure nostrud officia. Et deserunt et aliquip voluptate elit cupidatat. Adipisicing enim minim do anim eiusmod est. Irure laboris anim voluptate proident. Cillum reprehenderit est magna minim. Nostrud ex aute laborum ea irure amet ea ipsum ut non minim anim nisi.'
 		};
 	}
 
@@ -144,12 +146,19 @@ export default function App() {
 						form6={form.comments}
 						handleChange={handleChange}
 					/>
-					{/* {workElement} */}
 					<Work
 						works={works}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
-						deleteToggle={(event) => deleteToggle(event, works.id)}
+						deleteToggle={deleteToggle}
+						addWork={addWork}
+					/>
+
+					<Work
+						works={works}
+						setCurrentWorkId={setCurrentWorkId}
+						handleChange={handleChange}
+						deleteToggle={deleteToggle}
 						addWork={addWork}
 					/>
 				</div>
@@ -162,6 +171,7 @@ export default function App() {
 						form5={form.location}
 						form6={form.comments}
 						workTitle={'work experience'}
+						education={'education'}
 					>
 						{workElementPost}
 					</Post>

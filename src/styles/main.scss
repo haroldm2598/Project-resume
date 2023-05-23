@@ -88,19 +88,27 @@ input[type='email'],
 	}
 }
 
+.listComments {
+	font-size: 0.9rem;
+}
+
 .workForm {
 	margin: 1rem 0;
 }
 
 .workTitle {
 	margin: 0.8rem 0;
-	color: #14213d;
+	color: #2c4c8c;
 	font-size: 1.25rem;
 	text-transform: uppercase;
 }
 
+.workDetails {
+	margin-bottom: 1.2rem;
+}
+
 .work {
-	margin-bottom: 0.5rem;
+	margin-bottom: 0.4rem;
 	display: flex;
 	justify-content: space-between;
 	font-size: 0.8rem;

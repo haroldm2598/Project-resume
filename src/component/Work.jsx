@@ -1,22 +1,10 @@
+import WorkForm from './WorkForm';
+
 export default function Work(props) {
-	// if (props.itemLength <= 1) {
-	// 	return (
-	// 		<button className='work__btn' onClick={props.addWork}>
-	// 			Add
-	// 		</button>
-	// 	);
-	// }
-	return (
-		<>
-			<h1>Work Experience</h1>
-			{/* {props.workArr && !!props.workArr.length && (
-				<> */}
-			{props.works.map((item, index) => (
-				<>
+	/* <>
 					<form
 						className='workForm'
-						key={index}
-						onClick={() => props.setCurrentWorkId(props.works.id)}
+						onClick={() => props.setCurrentWorkId(item.id)}
 					>
 						<input
 							type='text'
@@ -59,13 +47,30 @@ export default function Work(props) {
 						/>
 					</form>
 
-					<button className='work__btn' onClick={props.deleteToggle}>
+					<button
+						className='work__btn'
+						onClick={(event) => props.deleteToggle(event, item.id)}
+					>
 						Delete
 					</button>
-				</>
+				</> */
+	return (
+		<>
+			<h1>Work Experience</h1>
+			{props.works.map((item) => (
+				<WorkForm
+					key={item.id}
+					work0={item.id}
+					work1={item.companyName}
+					work2={item.workPosition}
+					work3={item.dateStart}
+					work4={item.dateEnd}
+					work5={item.workDetails}
+					setCurrentWorkId={props.setCurrentWorkId}
+					handleChange={props.handleChange}
+					deleteToggle={props.deleteToggle}
+				/>
 			))}
-			{/* </>
-			)} */}
 
 			<button className='work__btn' onClick={props.addWork}>
 				Add
