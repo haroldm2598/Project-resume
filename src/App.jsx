@@ -10,7 +10,6 @@ export default function App() {
 	const [form, setForm] = useState(setDetails());
 	const [works, setWorks] = useState(setWorkDetails() || '');
 	const [currentWorkId, setCurrentWorkId] = useState('');
-	// const [deleteWork, setDeleteWork] = useState(works[0].isShow);
 
 	const currentWork =
 		works.find((work) => work.id === currentWorkId) || works[0];
@@ -98,23 +97,21 @@ export default function App() {
 
 		- TRANSFER ALL THE WORK VALUES INTO PROPS CHILDREN LIKE WHAT I DID IN workElementPost
 	*/
-	const workElement = works.map((item) => (
-		<Work
-			key={item.id}
-			// workArr={works}
-			workId={item.id}
-			work1={item.companyName}
-			work2={item.workPosition}
-			work3={item.dateStart}
-			work4={item.dateEnd}
-			work5={item.workDetails}
-			// isShow={deleteWork}
-			setCurrentWorkId={setCurrentWorkId}
-			handleChange={handleChange}
-			deleteToggle={(event) => deleteToggle(event, item.id)}
-			addWork={addWork}
-		/>
-	));
+	// const workElement = works.map((item) => (
+	// 	<Work
+	// 		key={item.id}
+	// 		workId={item.id}
+	// 		work1={item.companyName}
+	// 		work2={item.workPosition}
+	// 		work3={item.dateStart}
+	// 		work4={item.dateEnd}
+	// 		work5={item.workDetails}
+	// 		setCurrentWorkId={setCurrentWorkId}
+	// 		handleChange={handleChange}
+	// 		deleteToggle={(event) => deleteToggle(event, item.id)}
+	// 		addWork={addWork}
+	// 	/>
+	// ));
 
 	const workElementPost = works.map((item, index) => (
 		<WorkPost
@@ -147,7 +144,14 @@ export default function App() {
 						form6={form.comments}
 						handleChange={handleChange}
 					/>
-					{workElement && <Work workArr={works} />}
+					{/* {workElement} */}
+					<Work
+						works={works}
+						setCurrentWorkId={setCurrentWorkId}
+						handleChange={handleChange}
+						deleteToggle={(event) => deleteToggle(event, works.id)}
+						addWork={addWork}
+					/>
 				</div>
 				<div className='postContainer'>
 					<Post
