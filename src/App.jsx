@@ -15,9 +15,9 @@ export default function App() {
 	const currentWork =
 		works.find((work) => work.id === currentWorkId) || works[0];
 
-	useEffect(() => {
-		console.log(works);
-	}, [works]);
+	// useEffect(() => {
+	// 	console.log(works);
+	// }, [works]);
 
 	function deleteToggle(event, id) {
 		event.preventDefault();
@@ -35,6 +35,7 @@ export default function App() {
 			workDetails: 'Location',
 			isShow: true
 		};
+
 		setWorks([...works, work]);
 	}
 
@@ -82,13 +83,6 @@ export default function App() {
 			};
 		});
 
-		// setWorks((oldWorks) => {
-		// 	return {
-		// 		...oldWorks,
-		// 		[name]: value
-		// 	};
-		// });
-
 		setWorks(
 			works.map((item) =>
 				item.id === currentWork.id ? { ...item, [name]: value } : item
@@ -100,6 +94,7 @@ export default function App() {
 	const workElement = works.map((item) => (
 		<Work
 			key={item.id}
+			workArr={works}
 			workId={item.id}
 			work1={item.companyName}
 			work2={item.workPosition}
@@ -108,16 +103,15 @@ export default function App() {
 			work5={item.workDetails}
 			// isShow={deleteWork}
 			setCurrentWorkId={setCurrentWorkId}
+			handleChange={handleChange}
 			deleteToggle={(event) => deleteToggle(event, item.id)}
 			addWork={addWork}
-			handleChange={handleChange}
 		/>
 	));
 
 	const workElementPost = works.map((item, index) => (
 		<WorkPost
 			key={index}
-			// workTitle={'work experience'}
 			work1={item.workPosition}
 			work2={item.companyName}
 			work3={item.dateStart}
