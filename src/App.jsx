@@ -9,11 +9,15 @@ import './styles/main.scss';
 export default function App() {
 	const [form, setForm] = useState(setDetails());
 	const [works, setWorks] = useState(setWorkDetails() || '');
+	const [schools, setSchools] = useState(setEducationDetails() || '');
 	const [currentWorkId, setCurrentWorkId] = useState('');
 
-	const currentWork =
-		works.find((work) => work.id === currentWorkId) || works[0];
+	// const currentWork =
+	// 	works.find((work) => work.id === currentWorkId) || works[0];
 
+	function currentWork(arrFind) {
+		return arrFind.find((work) => work.id === currentWorkId) || works[0];
+	}
 	// KAPAG GUSTO KO MAY I ACCESS SA LABAS NG CODE
 	// useEffect(() => {
 	// 	console.log(works);
@@ -32,8 +36,7 @@ export default function App() {
 			workPosition: 'Previous Position',
 			dateStart: 'Date start',
 			dateEnd: 'Date end',
-			workDetails: 'Work details',
-			isShow: true
+			workDetails: 'Work details'
 		};
 
 		setWorks([...works, work]);
@@ -59,17 +62,19 @@ export default function App() {
 				workPosition: 'Software Engineer',
 				dateStart: '2018',
 				dateEnd: '2020',
-				workDetails: 'france, milan',
-				isShow: true
-			},
+				workDetails: 'france, milan'
+			}
+		];
+	}
+
+	function setEducationDetails() {
+		return [
 			{
 				id: nanoid(),
-				companyName: 'Google Inc',
-				workPosition: 'Full stack lead',
-				dateStart: '2020',
-				dateEnd: 'present',
-				workDetails: 'USA, california',
-				isShow: true
+				schoolName: 'University of Malolos',
+				schoolDegree: 'Bachelor of Science in Quamtum ',
+				dateStart: '2014',
+				dateEnd: '2018'
 			}
 		];
 	}
@@ -86,34 +91,16 @@ export default function App() {
 
 		setWorks(
 			works.map((item) =>
-				item.id === currentWork.id ? { ...item, [name]: value } : item
+				item.id === currentWork(works).id ? { ...item, [name]: value } : item
+			)
+		);
+
+		setSchools(
+			schools.map((item) =>
+				item.id === currentWork(schools).id ? { ...item, [name]: value } : item
 			)
 		);
 	}
-
-	// ELEMENT THAT WILL GET AND POST
-	/* 
-		- PROBLEM IS. IF THE MAP IS BEING PASS AS PROPS
-		THE LENGTH OF AN EMPTY ARRAY WILL NOT BE CONSOLE OR READ AS PROPS
-		- ELSE IF NOT BEING MAP AND PASS AS NORMAL PROPS TO COMPONENT THEREFORE IT WILL WORK
-
-		- TRANSFER ALL THE WORK VALUES INTO PROPS CHILDREN LIKE WHAT I DID IN workElementPost
-	*/
-	// const workElement = works.map((item) => (
-	// 	<Work
-	// 		key={item.id}
-	// 		workId={item.id}
-	// 		work1={item.companyName}
-	// 		work2={item.workPosition}
-	// 		work3={item.dateStart}
-	// 		work4={item.dateEnd}
-	// 		work5={item.workDetails}
-	// 		setCurrentWorkId={setCurrentWorkId}
-	// 		handleChange={handleChange}
-	// 		deleteToggle={(event) => deleteToggle(event, item.id)}
-	// 		addWork={addWork}
-	// 	/>
-	// ));
 
 	const workElementPost = works.map((item, index) => (
 		<WorkPost
@@ -147,6 +134,7 @@ export default function App() {
 						handleChange={handleChange}
 					/>
 					<Work
+						formTitle={'Work Experience'}
 						works={works}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
@@ -155,6 +143,7 @@ export default function App() {
 					/>
 
 					<Work
+						formTitle={'Education'}
 						works={works}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}

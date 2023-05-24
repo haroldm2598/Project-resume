@@ -37,13 +37,15 @@ export default function WorkForm(props) {
 					value={props.work4}
 				/>
 
-				<input
-					type='text'
-					placeholder='Work Details'
-					onChange={props.handleChange}
-					name='workDetails'
-					value={props.work5}
-				/>
+				{props.work5 && (
+					<input
+						type='text'
+						placeholder='Work Details'
+						onChange={props.handleChange}
+						name='workDetails'
+						value={props.work5}
+					/>
+				)}
 			</form>
 
 			<button
