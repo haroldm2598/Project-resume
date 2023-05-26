@@ -11,6 +11,7 @@ export default function App() {
 	const [form, setForm] = useState(ArrOfObjects || '');
 	const [works, setWorks] = useState(setWorkDetails() || '');
 	const [currentWorkId, setCurrentWorkId] = useState('');
+	const result = form.map((item) => item);
 
 	function currentWork(arrFind) {
 		return arrFind.find((work) => work.id === currentWorkId) || works[0];
@@ -35,18 +36,6 @@ export default function App() {
 		setWorks([...works, work]);
 	}
 
-	// function setDetails() {
-	// 	return {
-	// 		fullName: 'John Doe',
-	// 		position: 'Software Engineer',
-	// 		phoneNumber: '1239 982 721',
-	// 		emailAddress: 'testing@gmail.com',
-	// 		location: 'france, milan',
-	// 		comments:
-	// 			'Cupidatat sunt anim incididunt nisi labore sunt nulla Lorem elit irure. Aliquip quis excepteur et nostrud enim irure nostrud officia. Et deserunt et aliquip voluptate elit cupidatat. Adipisicing enim minim do anim eiusmod est. Irure laboris anim voluptate proident. Cillum reprehenderit est magna minim. Nostrud ex aute laborum ea irure amet ea ipsum ut non minim anim nisi.'
-	// 	};
-	// }
-
 	function setWorkDetails() {
 		return [
 			{
@@ -62,34 +51,11 @@ export default function App() {
 
 	function handleChange(event) {
 		const { name, value } = event.target;
-
-		setForm((prevForm) => {
-			console.log([
-				{
-					0: {
-						...prevForm,
-						0: {
-							...prevForm,
-							[name]: value
-						}
-					}
-				}
-			]);
-
-			return [
-				{
-					0: {
-						...prevForm,
-						[name]: value
-					}
-				}
-			];
-
-			// return {
-			// 	...prevForm,
-			// 	[name]: value
-			// };
-		});
+		setForm(
+			form.map((item) =>
+				item.id === currentWork(form).id ? { ...item, [name]: value } : item
+			)
+		);
 
 		setWorks(
 			works.map((item) =>
@@ -98,12 +64,19 @@ export default function App() {
 		);
 	}
 
-	const result = form.map((item) => item.personDetails);
-	// console.log(result[0]?.fullName);
-	// console.log(result[0]?.position);
-	// console.log(result[0]?.phoneNumber);
-	// console.log(result[0]?.emailAddress);
-	// console.log(result[0]?.location);
+	// console.log(result[0].id === currentWork(form).id);
+	// CORRECT AFTER TRUE ACCESS INSIDE ARRAYOFOBJECT UPDATE THE STATE
+	const test = form.map((item) => item);
+	if (Object.keys(test[1])[0] === 'workDetails') {
+		console.log('ito na nga mga lods');
+	}
+
+	function testObject() {
+		return form.map((item) =>
+			Object.keys(item)[0].includes('workDetails') ? { ...item } : 'hindi'
+		);
+	}
+	console.log(testObject());
 
 	// function addEducation(event) {
 	// 	event.preventDefault();
@@ -153,12 +126,14 @@ export default function App() {
 						name4={'emailAddress'}
 						name5={'location'}
 						name6={'comments'}
+						form0={result[0]?.id}
 						form1={result[0]?.fullName}
 						form2={result[0]?.position}
 						form3={result[0]?.phoneNumber}
 						form4={result[0]?.emailAddress}
 						form5={result[0]?.location}
 						form6={result[0]?.comments}
+						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
 					/>
 					<Work

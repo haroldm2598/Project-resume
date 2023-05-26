@@ -2,7 +2,7 @@ export default function Details(props) {
 	return (
 		<>
 			<h1>{props.title}</h1>
-			<form>
+			<form onClick={() => props.setCurrentWorkId(props.form0)}>
 				<input
 					type='text'
 					placeholder='full name'
