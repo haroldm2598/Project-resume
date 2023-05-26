@@ -4,24 +4,17 @@ import Details from './component/Details';
 import Work from './component/Work';
 import Post from './component/Post';
 import WorkPost from './component/WorkPost';
+import { ArrOfObjects } from './data';
 import './styles/main.scss';
 
 export default function App() {
-	const [form, setForm] = useState(setDetails());
+	const [form, setForm] = useState(ArrOfObjects || '');
 	const [works, setWorks] = useState(setWorkDetails() || '');
-	const [schools, setSchools] = useState(setEducationDetails() || '');
 	const [currentWorkId, setCurrentWorkId] = useState('');
-
-	// const currentWork =
-	// 	works.find((work) => work.id === currentWorkId) || works[0];
 
 	function currentWork(arrFind) {
 		return arrFind.find((work) => work.id === currentWorkId) || works[0];
 	}
-	// KAPAG GUSTO KO MAY I ACCESS SA LABAS NG CODE
-	// useEffect(() => {
-	// 	console.log(works);
-	// }, [works]);
 
 	function deleteToggle(event, id) {
 		event.preventDefault();
@@ -42,17 +35,17 @@ export default function App() {
 		setWorks([...works, work]);
 	}
 
-	function setDetails() {
-		return {
-			fullName: 'John Doe',
-			position: 'Software Engineer',
-			phoneNumber: '1239 982 721',
-			emailAddress: 'testing@gmail.com',
-			location: 'france, milan',
-			comments:
-				'Cupidatat sunt anim incididunt nisi labore sunt nulla Lorem elit irure. Aliquip quis excepteur et nostrud enim irure nostrud officia. Et deserunt et aliquip voluptate elit cupidatat. Adipisicing enim minim do anim eiusmod est. Irure laboris anim voluptate proident. Cillum reprehenderit est magna minim. Nostrud ex aute laborum ea irure amet ea ipsum ut non minim anim nisi.'
-		};
-	}
+	// function setDetails() {
+	// 	return {
+	// 		fullName: 'John Doe',
+	// 		position: 'Software Engineer',
+	// 		phoneNumber: '1239 982 721',
+	// 		emailAddress: 'testing@gmail.com',
+	// 		location: 'france, milan',
+	// 		comments:
+	// 			'Cupidatat sunt anim incididunt nisi labore sunt nulla Lorem elit irure. Aliquip quis excepteur et nostrud enim irure nostrud officia. Et deserunt et aliquip voluptate elit cupidatat. Adipisicing enim minim do anim eiusmod est. Irure laboris anim voluptate proident. Cillum reprehenderit est magna minim. Nostrud ex aute laborum ea irure amet ea ipsum ut non minim anim nisi.'
+	// 	};
+	// }
 
 	function setWorkDetails() {
 		return [
@@ -67,26 +60,35 @@ export default function App() {
 		];
 	}
 
-	function setEducationDetails() {
-		return [
-			{
-				id: nanoid(),
-				schoolName: 'University of Malolos',
-				schoolDegree: 'Bachelor of Science in Quamtum ',
-				dateStart: '2014',
-				dateEnd: '2018'
-			}
-		];
-	}
-
-	function handleChange() {
+	function handleChange(event) {
 		const { name, value } = event.target;
 
 		setForm((prevForm) => {
-			return {
-				...prevForm,
-				[name]: value
-			};
+			console.log([
+				{
+					0: {
+						...prevForm,
+						0: {
+							...prevForm,
+							[name]: value
+						}
+					}
+				}
+			]);
+
+			return [
+				{
+					0: {
+						...prevForm,
+						[name]: value
+					}
+				}
+			];
+
+			// return {
+			// 	...prevForm,
+			// 	[name]: value
+			// };
 		});
 
 		setWorks(
@@ -94,13 +96,39 @@ export default function App() {
 				item.id === currentWork(works).id ? { ...item, [name]: value } : item
 			)
 		);
-
-		setSchools(
-			schools.map((item) =>
-				item.id === currentWork(schools).id ? { ...item, [name]: value } : item
-			)
-		);
 	}
+
+	const result = form.map((item) => item.personDetails);
+	// console.log(result[0]?.fullName);
+	// console.log(result[0]?.position);
+	// console.log(result[0]?.phoneNumber);
+	// console.log(result[0]?.emailAddress);
+	// console.log(result[0]?.location);
+
+	// function addEducation(event) {
+	// 	event.preventDefault();
+	// 	const school = {
+	// 		id: nanoid(),
+	// 		schoolName: 'University of Malolos',
+	// 		schoolDegree: 'Bachelor of Science in Quamtum ',
+	// 		dateStart: '2014',
+	// 		dateEnd: '2018'
+	// 	};
+
+	// 	setWorks([...schools, school]);
+	// }
+
+	// function setEducationDetails() {
+	// 	return [
+	// 		{
+	// 			id: nanoid(),
+	// 			schoolName: 'University of Malolos',
+	// 			schoolDegree: 'Bachelor of Science in Quamtum ',
+	// 			dateStart: '2014',
+	// 			dateEnd: '2018'
+	// 		}
+	// 	];
+	// }
 
 	const workElementPost = works.map((item, index) => (
 		<WorkPost
@@ -125,12 +153,12 @@ export default function App() {
 						name4={'emailAddress'}
 						name5={'location'}
 						name6={'comments'}
-						form1={form.fullName}
-						form2={form.position}
-						form3={form.phoneNumber}
-						form4={form.emailAddress}
-						form5={form.location}
-						form6={form.comments}
+						form1={result[0]?.fullName}
+						form2={result[0]?.position}
+						form3={result[0]?.phoneNumber}
+						form4={result[0]?.emailAddress}
+						form5={result[0]?.location}
+						form6={result[0]?.comments}
 						handleChange={handleChange}
 					/>
 					<Work
@@ -142,23 +170,23 @@ export default function App() {
 						addWork={addWork}
 					/>
 
-					<Work
+					{/* <Work
 						formTitle={'Education'}
-						works={works}
+						schools={schools}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
 						deleteToggle={deleteToggle}
-						addWork={addWork}
-					/>
+						addEducation={addEducation}
+					/> */}
 				</div>
 				<div className='postContainer'>
 					<Post
-						form1={form.fullName}
-						form2={form.position}
-						form3={form.phoneNumber}
-						form4={form.emailAddress}
-						form5={form.location}
-						form6={form.comments}
+						form1={result[0]?.fullName}
+						form2={result[0]?.position}
+						form3={result[0]?.phoneNumber}
+						form4={result[0]?.emailAddress}
+						form5={result[0]?.location}
+						form6={result[0]?.comments}
 						workTitle={'work experience'}
 						education={'education'}
 					>

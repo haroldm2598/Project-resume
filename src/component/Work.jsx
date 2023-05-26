@@ -19,6 +19,20 @@ export default function Work(props) {
 				/>
 			))}
 
+			{/* {props.schools.map((item) => (
+				<WorkForm
+					key={item.id}
+					work0={item.id}
+					work1={item.schoolName}
+					work2={item.schoolDegree}
+					work3={item.dateStart}
+					work4={item.dateEnd}
+					setCurrentWorkId={props.setCurrentWorkId}
+					handleChange={props.handleChange}
+					deleteToggle={props.deleteToggle}
+				/>
+			))} */}
+
 			<button className='work__btn' onClick={props.addWork}>
 				Add
 			</button>
