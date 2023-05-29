@@ -10,6 +10,7 @@ import './styles/main.scss';
 export default function App() {
 	const [form, setForm] = useState(ArrOfObjects || '');
 	const [works, setWorks] = useState(setWorkDetails() || '');
+	const [testWorks, setTestWorks] = useState(ArrOfObjects[1] || '');
 	const [currentWorkId, setCurrentWorkId] = useState('');
 	const result = form.map((item) => item);
 
@@ -62,21 +63,31 @@ export default function App() {
 				item.id === currentWork(works).id ? { ...item, [name]: value } : item
 			)
 		);
+		// console.log(form);
+		// setWorks(
+		// 	form.map((item) =>
+		// 		Object.keys(item)[0].includes('workDetails')
+		// 			? { ...item, workDetails: { [name]: value } }
+		// 			: 'hindi'
+		// 	)
+		// );
 	}
 
 	// console.log(result[0].id === currentWork(form).id);
 	// CORRECT AFTER TRUE ACCESS INSIDE ARRAYOFOBJECT UPDATE THE STATE
-	const test = form.map((item) => item);
-	if (Object.keys(test[1])[0] === 'workDetails') {
-		console.log('ito na nga mga lods');
-	}
+	// const test = form.map((item) => item);
+	// if (Object.keys(test[1])[0] === 'workDetails') {
+	// 	console.log('ito na nga mga lods');
+	// }
 
-	function testObject() {
-		return form.map((item) =>
-			Object.keys(item)[0].includes('workDetails') ? { ...item } : 'hindi'
-		);
-	}
-	console.log(testObject());
+	// function testObject() {
+	// 	return form.map((item) =>
+	// 		Object.keys(item)[0].includes('workDetails')
+	// 			? { ...item, workDetails: 'gege lods' }
+	// 			: 'hindi'
+	// 	);
+	// }
+	// console.log(testObject());
 
 	// function addEducation(event) {
 	// 	event.preventDefault();
@@ -103,16 +114,37 @@ export default function App() {
 	// 	];
 	// }
 
-	const workElementPost = works.map((item, index) => (
-		<WorkPost
-			key={index}
-			work1={item.workPosition}
-			work2={item.companyName}
-			work3={item.dateStart}
-			work4={item.dateEnd}
-			work5={item.workDetails}
-		/>
-	));
+	// const workElementPost = works.map((item, index) => (
+	// 	<WorkPost
+	// 		key={index}
+	// 		work1={item.workPosition}
+	// 		work2={item.companyName}
+	// 		work3={item.dateStart}
+	// 		work4={item.dateEnd}
+	// 		work5={item.workDetails}
+	// 	/>
+	// ));
+
+	function WORKFORMTESTMAP() {
+		const result = testWorks.workDetails;
+		// return `${result[1][0].id} ${result[1][0].companyName} ${result[1][0].workPosition}`;
+
+		for (let i = 0; i < result.length; i++) {
+			const resultTo = (
+				<WorkPost
+					key={result[i].id}
+					work1={result[i].workPosition}
+					work2={result[i].companyName}
+					work3={result[i].dateStart}
+					work4={result[i].dateEnd}
+					work5={result[i].workDetails}
+				/>
+			);
+			return result.length;
+		}
+	}
+
+	console.log(WORKFORMTESTMAP());
 
 	return (
 		<>
@@ -165,7 +197,7 @@ export default function App() {
 						workTitle={'work experience'}
 						education={'education'}
 					>
-						{workElementPost}
+						{WORKFORMTESTMAP()}
 					</Post>
 				</div>
 			</div>

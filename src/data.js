@@ -14,7 +14,7 @@ export const ArrOfObjects = [
 	{
 		workDetails: [
 			{
-				id: 'RandomID',
+				id: nanoid(),
 				companyName: 'Global city',
 				workPosition: 'Head office',
 				dateStart: '2008',
@@ -22,7 +22,7 @@ export const ArrOfObjects = [
 				workDetails: 'white beach!'
 			},
 			{
-				id: 'RandomID',
+				id: nanoid(),
 				companyName: 'Cebu city',
 				workPosition: 'Downtown office',
 				dateStart: '2007',

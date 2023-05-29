@@ -31,8 +31,8 @@ export default function Post(props) {
 			<h1 className='workTitle'>{props.workTitle}</h1>
 			{props.children}
 
-			<h1 className='workTitle'>{props.education}</h1>
-			{props.children}
+			{/* <h1 className='workTitle'>{props.education}</h1>
+			{props.children} */}
 		</>
 	);
 }
