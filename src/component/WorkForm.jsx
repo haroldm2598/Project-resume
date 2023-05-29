@@ -54,6 +54,7 @@ export default function WorkForm(props) {
 			>
 				Delete
 			</button>
+			{props.test}
 		</>
 	);
 }

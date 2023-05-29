@@ -18,9 +18,18 @@ export default function App() {
 		return arrFind.find((work) => work.id === currentWorkId) || works[0];
 	}
 
+	// ORIGIN FOR works and setWorks
+	// function deleteToggle(event, id) {
+	// 	event.preventDefault();
+	// 	setWorks(works.filter((item) => item.id !== id));
+	// }
+
+	// BETA TESTING FOR testWorks and setTestWorks
 	function deleteToggle(event, id) {
 		event.preventDefault();
-		setWorks(works.filter((item) => item.id !== id));
+		const getWorkDetails = testWorks.workDetails;
+		console.log('clicked!');
+		setTestWorks(getWorkDetails.find((item) => item.id === id));
 	}
 
 	function addWork(event) {
@@ -58,11 +67,12 @@ export default function App() {
 			)
 		);
 
-		setWorks(
-			works.map((item) =>
-				item.id === currentWork(works).id ? { ...item, [name]: value } : item
-			)
-		);
+		// setWorks(
+		// 	works.map((item) =>
+		// 		item.id === currentWork(works).id ? { ...item, [name]: value } : item
+		// 	)
+		// );
+
 		// console.log(form);
 		// setWorks(
 		// 	form.map((item) =>
@@ -125,26 +135,36 @@ export default function App() {
 	// 	/>
 	// ));
 
-	function WORKFORMTESTMAP() {
-		const result = testWorks.workDetails;
-		// return `${result[1][0].id} ${result[1][0].companyName} ${result[1][0].workPosition}`;
+	function testWork() {
+		const workPostDetails = testWorks.workDetails;
 
-		for (let i = 0; i < result.length; i++) {
-			const resultTo = (
-				<WorkPost
-					key={result[i].id}
-					work1={result[i].workPosition}
-					work2={result[i].companyName}
-					work3={result[i].dateStart}
-					work4={result[i].dateEnd}
-					work5={result[i].workDetails}
-				/>
-			);
-			return result.length;
-		}
+		const workElementPost = workPostDetails.map((item) => (
+			<WorkPost
+				key={item?.id}
+				work1={item?.workPosition}
+				work2={item?.companyName}
+				work3={item?.dateStart}
+				work4={item?.dateEnd}
+				work5={item?.workDetails}
+			/>
+		));
+
+		return workElementPost;
+
+		// for (let i = 0; i < result.length; i++) {
+		// 	const resultTo = (
+		// 		<WorkPost
+		// 			key={result[i].id}
+		// 			work1={result[i].workPosition}
+		// 			work2={result[i].companyName}
+		// 			work3={result[i].dateStart}
+		// 			work4={result[i].dateEnd}
+		// 			work5={result[i].workDetails}
+		// 		/>
+		// 	);
+		// 	return resultTo;
+		// }
 	}
-
-	console.log(WORKFORMTESTMAP());
 
 	return (
 		<>
@@ -168,23 +188,25 @@ export default function App() {
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
 					/>
-					<Work
+					{/* ORIGIN FOR work && setWork */}
+					{/* <Work
 						formTitle={'Work Experience'}
 						works={works}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
 						deleteToggle={deleteToggle}
 						addWork={addWork}
-					/>
+					/> */}
 
-					{/* <Work
-						formTitle={'Education'}
-						schools={schools}
+					{/* BETA TESTING FOR testWork && setTestWork */}
+					<Work
+						formTitle={'Work Experience'}
+						works={testWorks.workDetails}
 						setCurrentWorkId={setCurrentWorkId}
 						handleChange={handleChange}
 						deleteToggle={deleteToggle}
-						addEducation={addEducation}
-					/> */}
+						addWork={addWork}
+					/>
 				</div>
 				<div className='postContainer'>
 					<Post
@@ -197,7 +219,7 @@ export default function App() {
 						workTitle={'work experience'}
 						education={'education'}
 					>
-						{WORKFORMTESTMAP()}
+						{testWork()}
 					</Post>
 				</div>
 			</div>

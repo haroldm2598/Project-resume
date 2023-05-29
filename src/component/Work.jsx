@@ -4,7 +4,8 @@ export default function Work(props) {
 	return (
 		<>
 			<h1>{props.formTitle}</h1>
-			{props.works.map((item) => (
+			{/* ORIGIN FOR work and setWork */}
+			{/* {props.works.map((item) => (
 				<WorkForm
 					key={item.id}
 					work0={item.id}
@@ -17,21 +18,24 @@ export default function Work(props) {
 					handleChange={props.handleChange}
 					deleteToggle={props.deleteToggle}
 				/>
-			))}
+			))} */}
 
-			{/* {props.schools.map((item) => (
+			{/* BETA TESTING FOR testWork and setTestWork */}
+			{props.works.map((item) => (
 				<WorkForm
 					key={item.id}
 					work0={item.id}
-					work1={item.schoolName}
-					work2={item.schoolDegree}
+					work1={item.companyName}
+					work2={item.workPosition}
 					work3={item.dateStart}
 					work4={item.dateEnd}
+					work5={item.workDetails}
 					setCurrentWorkId={props.setCurrentWorkId}
 					handleChange={props.handleChange}
 					deleteToggle={props.deleteToggle}
+					test={console.log(item.id)}
 				/>
-			))} */}
+			))}
 
 			<button className='work__btn' onClick={props.addWork}>
 				Add
