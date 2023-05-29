@@ -15,11 +15,11 @@ export const ArrOfObjects = [
 		workDetails: [
 			{
 				id: nanoid(),
-				companyName: 'Global city',
-				workPosition: 'Head office',
-				dateStart: '2008',
-				dateEnd: '2010',
-				workDetails: 'white beach!'
+				companyName: 'A Software Engineer',
+				workPosition: 'Software Engineer',
+				dateStart: '2018',
+				dateEnd: '2020',
+				workDetails: 'france, milan'
 			},
 			{
 				id: nanoid(),

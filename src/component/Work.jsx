@@ -21,7 +21,7 @@ export default function Work(props) {
 			))} */}
 
 			{/* BETA TESTING FOR testWork and setTestWork */}
-			{props.works.map((item) => (
+			{props.testWorks.map((item) => (
 				<WorkForm
 					key={item.id}
 					work0={item.id}
@@ -33,7 +33,6 @@ export default function Work(props) {
 					setCurrentWorkId={props.setCurrentWorkId}
 					handleChange={props.handleChange}
 					deleteToggle={props.deleteToggle}
-					test={console.log(item.id)}
 				/>
 			))}
 
