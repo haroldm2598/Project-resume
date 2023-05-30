@@ -9,7 +9,8 @@ export default function WorkForm(props) {
 					type='text'
 					placeholder='company name'
 					onChange={props.handleChange}
-					name='companyName'
+					name={props.name1}
+					// name='companyName'
 					value={props.work1}
 				/>
 
@@ -17,7 +18,8 @@ export default function WorkForm(props) {
 					type='text'
 					placeholder='Position'
 					onChange={props.handleChange}
-					name='workPosition'
+					name={props.name2}
+					// name='workPosition'
 					value={props.work2}
 				/>
 
@@ -25,7 +27,8 @@ export default function WorkForm(props) {
 					type='text'
 					placeholder='Date started'
 					onChange={props.handleChange}
-					name='dateStart'
+					name={props.name3}
+					// name='dateStart'
 					value={props.work3}
 				/>
 
@@ -33,7 +36,8 @@ export default function WorkForm(props) {
 					type='text'
 					placeholder='Date ended'
 					onChange={props.handleChange}
-					name='dateEnd'
+					name={props.name4}
+					// name='dateEnd'
 					value={props.work4}
 				/>
 

@@ -14,25 +14,22 @@ export default function App() {
 	const [currentTargetId, setCurrentTargetId] = useState('');
 	const result = form.map((item) => item);
 
-	console.log(works);
 	function currentTarget(arrFind) {
 		return arrFind.find((work) => work.id === currentTargetId) || arrFind[0];
 	}
 
-	function deleteToggle(event, id, arr) {
+	function deleteToggle(event, id, arr, setArr) {
 		event.preventDefault();
-		setWorks(arr.filter((item) => item.id !== id));
+		setArr(arr.filter((item) => item.id !== id));
 	}
 
-	// ADD AN PARAMETER WHERE MEETS THE TARGET OBJECT FOR PUSHING NEW DETAILS
-	function addWork(event) {
-		event.preventDefault();
+	function getDetails() {
 		const work = {
 			id: nanoid(),
 			companyName: 'Company here',
 			workPosition: 'Previous Position',
-			dateStart: 'Date start',
-			dateEnd: 'Date end',
+			workDateStart: 'Date start',
+			workDateEnd: 'Date end',
 			workDetails: 'Work details'
 		};
 
@@ -40,12 +37,19 @@ export default function App() {
 			id: nanoid(),
 			schoolName: 'Education attainment',
 			schoolDegree: 'Education level',
-			dateStart: 'Date start',
-			dateEnd: 'Date end'
+			schoolDateStart: 'Date start',
+			schoolDateEnd: 'Date end'
 		};
 
-		setWorks([...works, work]);
-		setSchools([...schools, school]);
+		return { work, school };
+	}
+
+	function addWork(event, obj, arr, setArr) {
+		event.preventDefault();
+
+		setArr([...arr, obj]);
+		// setWorks([...works, work]);
+		// setSchools([...schools, school]);
 	}
 
 	function handleChange(event) {
@@ -61,6 +65,14 @@ export default function App() {
 				item.id === currentTarget(works).id ? { ...item, [name]: value } : item
 			)
 		);
+
+		setSchools(
+			schools.map((item) =>
+				item.id === currentTarget(schools).id
+					? { ...item, [name]: value }
+					: item
+			)
+		);
 	}
 
 	const workElementPost = works.map((item) => (
@@ -68,9 +80,19 @@ export default function App() {
 			key={item?.id}
 			work1={item?.workPosition}
 			work2={item?.companyName}
-			work3={item?.dateStart}
-			work4={item?.dateEnd}
+			work3={item?.workDateStart}
+			work4={item?.workDateEnd}
 			work5={item?.workDetails}
+		/>
+	));
+
+	const schoolElementPost = schools.map((item) => (
+		<WorkPost
+			key={item?.id}
+			work1={item?.schoolName}
+			work2={item?.schoolDegree}
+			work3={item?.schoolDateStart}
+			work4={item?.schoolDateEnd}
 		/>
 	));
 
@@ -98,9 +120,15 @@ export default function App() {
 					/>
 
 					<Work
-						formTitle={'Work Experience'}
+						key={1}
+						formTitle1={'Work Experience'}
+						formTitle2={'Education'}
 						works={works}
+						schools={schools}
 						setCurrentTargetId={setCurrentTargetId}
+						setWorks={setWorks}
+						setSchools={setSchools}
+						getDetails={getDetails}
 						handleChange={handleChange}
 						deleteToggle={deleteToggle}
 						addWork={addWork}
@@ -117,7 +145,10 @@ export default function App() {
 						workTitle={'work experience'}
 						education={'education'}
 					>
+						<h1 className='workTitle'>{'work experience'}</h1>
 						{workElementPost}
+						<h1 className='workTitle'>{'education'}</h1>
+						{schoolElementPost}
 					</Post>
 				</div>
 			</div>

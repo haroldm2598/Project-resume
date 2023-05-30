@@ -17,16 +17,16 @@ export const ArrOfObjects = [
 				id: nanoid(),
 				companyName: 'A Software Engineer',
 				workPosition: 'Software Engineer',
-				dateStart: '2018',
-				dateEnd: '2020',
+				workDateStart: '2018',
+				workDateEnd: '2020',
 				workDetails: 'france, milan'
 			},
 			{
 				id: nanoid(),
 				companyName: 'Cebu city',
 				workPosition: 'Downtown office',
-				dateStart: '2007',
-				dateEnd: '2008',
+				workDateStart: '2007',
+				workDateEnd: '2008',
 				workDetails: 'Ilalim ng beach'
 			}
 		]
@@ -37,15 +37,15 @@ export const ArrOfObjects = [
 				id: nanoid(),
 				schoolName: 'University of the westside',
 				schoolDegree: 'Master of 2Pac',
-				dateStart: '2007',
-				dateEnd: '2008'
+				schoolDateStart: '2007',
+				schoolDateEnd: '2008'
 			},
 			{
 				id: nanoid(),
 				schoolName: 'University of the eastside',
 				schoolDegree: 'Bachelor of Rapping in Big choppie',
-				dateStart: '2003',
-				dateEnd: '2007'
+				schoolDateStart: '2003',
+				schoolDateEnd: '2007'
 			}
 		]
 	}
