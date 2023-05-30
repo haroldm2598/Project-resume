@@ -3,7 +3,7 @@ export default function WorkForm(props) {
 		<>
 			<form
 				className='workForm'
-				onClick={() => props.setCurrentWorkId(props.work0)}
+				onClick={() => props.setCurrentTargetId(props.work0)}
 			>
 				<input
 					type='text'
@@ -48,10 +48,7 @@ export default function WorkForm(props) {
 				)}
 			</form>
 
-			<button
-				className='work__btn'
-				onClick={(event) => props.deleteToggle(event, props.work0)}
-			>
+			<button className='work__btn' onClick={props.deleteToggle}>
 				Delete
 			</button>
 		</>

@@ -34,14 +34,14 @@ export const ArrOfObjects = [
 	{
 		schoolDetail: [
 			{
-				id: 'RandomID',
+				id: nanoid(),
 				schoolName: 'University of the westside',
 				schoolDegree: 'Master of 2Pac',
 				dateStart: '2007',
 				dateEnd: '2008'
 			},
 			{
-				id: 'RandomID',
+				id: nanoid(),
 				schoolName: 'University of the eastside',
 				schoolDegree: 'Bachelor of Rapping in Big choppie',
 				dateStart: '2003',

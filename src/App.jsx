@@ -9,43 +9,22 @@ import './styles/main.scss';
 
 export default function App() {
 	const [form, setForm] = useState(ArrOfObjects || '');
-	// const [works, setWorks] = useState(setWorkDetails() || '');
-	const [testWorks, setTestWorks] = useState(ArrOfObjects[1].workDetails || '');
-	const [currentWorkId, setCurrentWorkId] = useState('');
+	const [works, setWorks] = useState(ArrOfObjects[1].workDetails || '');
+	const [schools, setSchools] = useState(ArrOfObjects[2].schoolDetail || '');
+	const [currentTargetId, setCurrentTargetId] = useState('');
 	const result = form.map((item) => item);
 
-	function currentWork(arrFind) {
-		return arrFind.find((work) => work.id === currentWorkId) || arrFind[0];
+	console.log(works);
+	function currentTarget(arrFind) {
+		return arrFind.find((work) => work.id === currentTargetId) || arrFind[0];
 	}
 
-	// ORIGIN FOR works and setWorks
-	// function deleteToggle(event, id) {
-	// 	event.preventDefault();
-	// 	setWorks(works.filter((item) => item.id !== id));
-	// }
-
-	// BETA TESTING FOR testWorks and setTestWorks
-	function deleteToggle(event, id) {
+	function deleteToggle(event, id, arr) {
 		event.preventDefault();
-		setTestWorks(testWorks.filter((item) => item.id !== id));
+		setWorks(arr.filter((item) => item.id !== id));
 	}
 
-	// ORIGIN FOR works and setWorks
-	// function addWork(event) {
-	// 	event.preventDefault();
-	// 	const work = {
-	// 		id: nanoid(),
-	// 		companyName: 'Company here',
-	// 		workPosition: 'Previous Position',
-	// 		dateStart: 'Date start',
-	// 		dateEnd: 'Date end',
-	// 		workDetails: 'Work details'
-	// 	};
-
-	// 	setWorks([...works, work]);
-	// }
-
-	// BETA TESTING FOR testWorks and setTestWorks
+	// ADD AN PARAMETER WHERE MEETS THE TARGET OBJECT FOR PUSHING NEW DETAILS
 	function addWork(event) {
 		event.preventDefault();
 		const work = {
@@ -57,60 +36,34 @@ export default function App() {
 			workDetails: 'Work details'
 		};
 
-		setTestWorks([...testWorks, work]);
-	}
+		const school = {
+			id: nanoid(),
+			schoolName: 'Education attainment',
+			schoolDegree: 'Education level',
+			dateStart: 'Date start',
+			dateEnd: 'Date end'
+		};
 
-	// function setWorkDetails() {
-	// 	return [
-	// 		{
-	// 			id: nanoid(),
-	// 			companyName: 'A Software Engineer',
-	// 			workPosition: 'Software Engineer',
-	// 			dateStart: '2018',
-	// 			dateEnd: '2020',
-	// 			workDetails: 'france, milan'
-	// 		}
-	// 	];
-	// }
+		setWorks([...works, work]);
+		setSchools([...schools, school]);
+	}
 
 	function handleChange(event) {
 		const { name, value } = event.target;
 		setForm(
 			form.map((item) =>
-				item.id === currentWork(form).id ? { ...item, [name]: value } : item
+				item.id === currentTarget(form).id ? { ...item, [name]: value } : item
 			)
 		);
 
-		// ORIGIN FOR works and setWorks
-		// setWorks(
-		// 	works.map((item) =>
-		// 		item.id === currentWork(works).id ? { ...item, [name]: value } : item
-		// 	)
-		// );
-
-		setTestWorks(
-			testWorks.map((item) =>
-				item.id === currentWork(testWorks).id
-					? { ...item, [name]: value }
-					: item
+		setWorks(
+			works.map((item) =>
+				item.id === currentTarget(works).id ? { ...item, [name]: value } : item
 			)
 		);
 	}
 
-	// ORIGIN FOR works and setWorks
-	// const workElementPost = works.map((item, index) => (
-	// 	<WorkPost
-	// 		key={index}
-	// 		work1={item.workPosition}
-	// 		work2={item.companyName}
-	// 		work3={item.dateStart}
-	// 		work4={item.dateEnd}
-	// 		work5={item.workDetails}
-	// 	/>
-	// ));
-
-	// BETA TESTING FOR testWork and setTestWork
-	const workElementPost = testWorks.map((item) => (
+	const workElementPost = works.map((item) => (
 		<WorkPost
 			key={item?.id}
 			work1={item?.workPosition}
@@ -140,23 +93,14 @@ export default function App() {
 						form4={result[0]?.emailAddress}
 						form5={result[0]?.location}
 						form6={result[0]?.comments}
-						setCurrentWorkId={setCurrentWorkId}
+						setCurrentTargetId={setCurrentTargetId}
 						handleChange={handleChange}
 					/>
-					{/* ORIGIN FOR work && setWork */}
-					{/* <Work
-						formTitle={'Work Experience'}
-						works={works}
-						setCurrentWorkId={setCurrentWorkId}
-						handleChange={handleChange}
-						deleteToggle={deleteToggle}
-						addWork={addWork}
-					/> */}
-					{/* BETA TESTING FOR testWork && setTestWork */}
+
 					<Work
 						formTitle={'Work Experience'}
-						testWorks={testWorks}
-						setCurrentWorkId={setCurrentWorkId}
+						works={works}
+						setCurrentTargetId={setCurrentTargetId}
 						handleChange={handleChange}
 						deleteToggle={deleteToggle}
 						addWork={addWork}
