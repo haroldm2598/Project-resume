@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700&family=Karla:wght@700&display=swap');
+@import './mixins';
 
 * {
 	padding: 0;
@@ -19,6 +20,12 @@ hr {
 	display: flex;
 	flex-direction: row;
 	background-color: rgb(46, 59, 49);
+
+	@include tablet-mobile {
+		flex-direction: column;
+		justify-content: center;
+		align-items: center;
+	}
 }
 .detailsContainer,
 .postContainer {
@@ -28,6 +35,11 @@ hr {
 	padding: 2rem;
 	background-color: #e3d9c7;
 	border-radius: 10px;
+
+	@include tablet-mobile {
+		width: 90%;
+		margin: 1rem;
+	}
 }
 .detailsContainer {
 	height: 100%;
@@ -113,11 +125,23 @@ input[type='email'],
 	justify-content: space-between;
 	font-size: 0.8rem;
 
+	@include media(mobile) {
+		flex-direction: column;
+	}
+
 	&__end {
 		display: flex;
 
 		&--company {
 			margin-right: 0.2rem;
+
+			@include media(mobile) {
+				margin-right: 0;
+			}
+		}
+
+		@include media(mobile) {
+			display: block;
 		}
 	}
 
